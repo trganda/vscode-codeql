@@ -23,6 +23,10 @@
 		},
 		{
 			"path": "ql"
+		},
+		{
+			"name": "[apache/activemq source archive]",
+			"uri": "codeql-zip-archive://1-137/c:\\Users\\Trganda\\AppData\\Roaming\\Code\\User\\workspaceStorage\\83a22f0d770d9d268f0c28e5cbfbfadc\\GitHub.vscode-codeql\\java\\codeql_db\\src.zip"
 		}
 	],
 	"settings": {
