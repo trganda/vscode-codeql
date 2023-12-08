@@ -1,10 +1,13 @@
 {
-  "extensions": [
-    "github.vscode-codeql",
-    "slevesque.vscode-zipexplorer"
-  ],
-  "postCreateCommand": "git submodule init && git submodule update --recursive",
-  "settings": {
-    "codeQL.runningQueries.memory": 2048
-  }
- }
+	"name": "vscode-codeql-starter",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+	"extensions": [
+		"github.vscode-codeql",
+		"slevesque.vscode-zipexplorer"
+	],
+	"postCreateCommand": "git submodule init && git submodule update --recursive",
+	"settings": {
+		"codeQL.runningQueries.memory": 2048
+	}
+}

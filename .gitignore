@@ -1,2 +1,4 @@
 # CodeQL compilation caches
 .cache/
+.DS_store
+vscode-codeql-starter.code-workspace
