@@ -1,6 +1,7 @@
 /**
  * @name local data flow
  * @description a basic examples query of local data flow
+ * @kind problem
  * @problem.severity warning
  * @id java/basic
  */

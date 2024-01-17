@@ -1,13 +1,15 @@
 /**
  * @name query for activemq method
- * @kind problem
+ * @kind path-problem
  * @problem.severity warning
- * @id org/trganda/java/test
+ * @id com/trganda/java/step2
  */
 
 import java
 import semmle.code.java.dataflow.TaintTracking
 import semmle.code.java.frameworks.Networking
+import semmle.code.java.dataflow.ExternalFlow
+import semmle.code.java.dataflow.FlowSources
 
 class WireFormat extends Class {
     WireFormat() {
@@ -35,6 +37,8 @@ module MyFlowConfiguration implements DataFlow::ConfigSig {
 }
 
 module MyFlow = TaintTracking::Global<MyFlowConfiguration>;
-from DataFlow::Node source, DataFlow::Node sink
-where MyFlow::flow(source, sink)
-select source, "Data flow to $@.", sink, sink.toString()
+
+from MyFlow::PathNode source, MyFlow::PathNode sink
+where MyFlow::flowPath(source, sink)
+select sink.getNode(), source, sink, "Data flow to $@.", 
+    source.getNode(), "user-provided value"
