@@ -3,15 +3,16 @@
  * @description User-controlled data may be evaluated as a Java EL expression, leading to arbitrary code execution.
  * @kind path-problem
  * @problem.severity warning
- * @id java/el/insecure-bean-validation
+ * @id com/github/trganda/insecure-bean-validation
  */
 
 import java
 import semmle.code.java.dataflow.DataFlow
 import semmle.code.java.dataflow.FlowSources
+import BeanValidation::PathGraph
 
 class TypeConstraintValidator extends RefType {
-  TypeConstraintValidator() { hasQualifiedName("javax.validation", "ConstraintValidator") }
+  TypeConstraintValidator() { this.hasQualifiedName("javax.validation", "ConstraintValidator") }
 }
 
 class ConstraintValidatorIsValidMethod extends Method {
@@ -26,7 +27,8 @@ class ConstraintValidatorIsValidMethod extends Method {
 
 class InsecureBeanValidationSource extends RemoteFlowSource {
   InsecureBeanValidationSource() {
-    exists(ConstraintValidatorIsValidMethod m | this.asParameter() = m.getParameter(0))
+    // exists(ConstraintValidatorIsValidMethod m | this.asParameter() = m.getParameter(0))
+    this.asParameter() = any(ConstraintValidatorIsValidMethod m).getParameter(0)
   }
 
   override string getSourceType() { result = "Insecure Bean Validation Source" }
@@ -34,7 +36,7 @@ class InsecureBeanValidationSource extends RemoteFlowSource {
 
 class TypeConstraintValidatorContext extends RefType {
   TypeConstraintValidatorContext() {
-    hasQualifiedName("javax.validation", "ConstraintValidatorContext")
+    this.hasQualifiedName("javax.validation", "ConstraintValidatorContext")
   }
 }
 
@@ -47,8 +49,8 @@ class BuildConstraintViolationWithTemplateMethod extends Method {
 
 class BuildConstraintViolationWithTemplateSink extends DataFlow::ExprNode {
   BuildConstraintViolationWithTemplateSink() {
-    exists(MethodAccess ma |
-      asExpr() = ma.getArgument(0) and
+    exists(MethodCall ma |
+      this.asExpr() = ma.getArgument(0) and
       ma.getMethod() instanceof BuildConstraintViolationWithTemplateMethod
     )
   }
@@ -57,17 +59,21 @@ class BuildConstraintViolationWithTemplateSink extends DataFlow::ExprNode {
 class ExceptionMessageMethod extends Method {
   ExceptionMessageMethod() {
     (
-      hasName("getMessage") or
-      hasName("getLocalizedMessage") or
-      hasName("toString")
+      this.hasName("getMessage") or
+      this.hasName("getLocalizedMessage") or
+      this.hasName("toString")
     ) and
     getDeclaringType().getASourceSupertype*() instanceof TypeThrowable
   }
 }
 
-class ExceptionTaintStep extends TaintTracking::AdditionalTaintStep {
-  override predicate step(DataFlow::Node n1, DataFlow::Node n2) {
-    exists(Call call, TryStmt t, CatchClause c, MethodAccess gm |
+module BeanValidationConfig implements DataFlow::ConfigSig {
+  predicate isSource(DataFlow::Node source) { source instanceof InsecureBeanValidationSource }
+
+  predicate isSink(DataFlow::Node sink) { sink instanceof BuildConstraintViolationWithTemplateSink }
+
+  predicate isAdditionalFlowStep(DataFlow::Node n1, DataFlow::Node n2) {
+    exists(Call call, TryStmt t, CatchClause c, MethodCall gm |
       call.getEnclosingStmt().getEnclosingStmt*() = t.getBlock() and
       t.getACatchClause() = c and
       (
@@ -82,18 +88,8 @@ class ExceptionTaintStep extends TaintTracking::AdditionalTaintStep {
   }
 }
 
-class BeanValidationConfig extends TaintTracking::Configuration {
-  BeanValidationConfig() { this = "BeanValidationConfig" }
+module BeanValidation = TaintTracking::Global<BeanValidationConfig>;
 
-  override predicate isSource(DataFlow::Node source) {
-    source instanceof InsecureBeanValidationSource
-  }
-
-  override predicate isSink(DataFlow::Node sink) {
-    sink instanceof BuildConstraintViolationWithTemplateSink
-  }
-}
-
-from BeanValidationConfig conf, DataFlow::PathNode source, DataFlow::PathNode sink
-where conf.hasFlowPath(source, sink)
-select source, sink, "Unsafe deserialization"
+from BeanValidation::PathNode source, BeanValidation::PathNode sink
+where BeanValidation::flowPath(source, sink)
+select sink, source, sink, "Template Injection of $@", sink, "user input"
