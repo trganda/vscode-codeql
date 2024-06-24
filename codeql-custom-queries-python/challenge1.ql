@@ -14,5 +14,6 @@ where
         .getMember("cursor")
         .getReturn()
         .getMember("execute")
-        .getACall()
+        .getACall() and
+  node.getLocation().getFile().getRelativePath().regexpMatch("2/challenge-1/.*")
 select node, "Call to django.db execute method"
