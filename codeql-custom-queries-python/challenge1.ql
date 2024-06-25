@@ -1,5 +1,6 @@
 /**
  * @kind problem
+ * @desc Find all method calls that are called ‘execute’ and come from the django.db library
  */
 
 import python
