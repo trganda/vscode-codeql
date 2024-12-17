@@ -4,7 +4,6 @@ import semmle.code.java.dataflow.FlowSources
 import semmle.code.java.frameworks.spring.SpringController
 
 
-
 private class MappingAnnotation extends Annotation {
     MappingAnnotation() {
         this.getType().getQualifiedName() = [
