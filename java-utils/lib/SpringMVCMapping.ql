@@ -9,5 +9,5 @@ import java
 import SpringMVCMapping
 
 from SpringControllerRequestMethod m
-select m, m.getMappedPath()
+select m, m.getDescription()
  

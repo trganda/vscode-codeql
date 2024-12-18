@@ -8,9 +8,15 @@ class SpringRequestMappingAnnotation extends Annotation {
     SpringRequestMappingAnnotation() { this.getType() instanceof SpringRequestMappingAnnotationType }
 }
 
+private class MethodDescAnnotation extends Annotation {
+    MethodDescAnnotation() {
+        this.getType().hasQualifiedName("io.swagger.annotiation", "ApiOperation")
+    }
+}
+
 /** 
  * A `SpringControllerMethod` that annotated with `SpringRequestMappingAnnotation`
- * */
+ */
 class SpringControllerRequestMethod extends SpringControllerMethod {
     SpringControllerRequestMethod() {
         exists(Method superMethod |
@@ -41,10 +47,8 @@ class SpringControllerRequestMethod extends SpringControllerMethod {
     string getMappedPath() {
         result = (formatMappedPath(getControllerMappedPath()) + formatMappedPath(getMethodMappedPath())).replaceAll("//", "/") 
     }
-}
 
-private class MethodDescAnnotation extends Annotation {
-    MethodDescAnnotation() {
-        this.getType().getQualifiedName()=["io.swagger.annotiation.ApiOperation"]
+    string getDescription() {
+        result = this.getAnAnnotation().(MethodDescAnnotation).getAnArrayValue(["value", "notes"]).(StringLiteral).getValue()
     }
 }
