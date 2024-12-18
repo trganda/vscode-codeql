@@ -1,0 +1,9 @@
+- description: Security queries for Java and Kotlin, include extended and experimental queries
+- queries: Security/CWE
+  from: codeql/java-queries
+- queries: experimental/Security/CWE
+  from: codeql/java-queries
+- exclude:
+    kind: table
+    id:
+      - java/count-untrusted-data-external-api
