@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "example"
+		},
+		{
+			"path": "java-query-pack"
+		}
+	],
+	"settings": {
+		"omnisharp.autoStart": false
+	}
+}

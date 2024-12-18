@@ -3,3 +3,7 @@
   from: codeql/java-queries
 - queries: experimental/Security/CWE
   from: codeql/java-queries
+- exclude:
+    kind: table
+    id:
+      - java/count-untrusted-data-external-api
