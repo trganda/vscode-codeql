@@ -1,5 +1,5 @@
 name: trganda/java-utils
-version: 0.0.1
+version: 0.0.2
 description: Utility library and queries for Java
 dependencies:
   # This uses the latest version of the codeql/java-all library.
