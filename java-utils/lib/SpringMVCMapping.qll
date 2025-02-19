@@ -1,6 +1,5 @@
 import java
 import semmle.code.java.dataflow.DataFlow
-import semmle.code.java.dataflow.FlowSources
 import semmle.code.java.frameworks.spring.SpringController
 
 /** Annotation of spring web request */
@@ -8,9 +7,9 @@ class SpringRequestMappingAnnotation extends Annotation {
     SpringRequestMappingAnnotation() { this.getType() instanceof SpringRequestMappingAnnotationType }
 }
 
-private class MethodDescAnnotation extends Annotation {
+class MethodDescAnnotation extends Annotation {
     MethodDescAnnotation() {
-        this.getType().hasQualifiedName("io.swagger.annotiation", "ApiOperation")
+        this.getType().hasQualifiedName("io.swagger.annotations", "ApiOperation")
     }
 }
 
@@ -26,11 +25,19 @@ class SpringControllerRequestMethod extends SpringControllerMethod {
     }
 
     private string getControllerMappedPath() {
-        result = this.getDeclaringType().getAnAnnotation().(SpringRequestMappingAnnotation).getAnArrayValue(["value", "path"]).(StringLiteral).getValue()
+        (result = this.getDeclaringType().getAnAnnotation().(SpringRequestMappingAnnotation).getStringValue("value") and result.length() > 0)
+        or
+        (result = this.getDeclaringType().getAnAnnotation().(SpringRequestMappingAnnotation).getStringValue("path") and result.length() > 0)
+        or
+        (result = this.getDeclaringType().getAnAnnotation().(SpringRequestMappingAnnotation).getAStringArrayValue(["value", "path"]) and result.length() > 0)
     }
 
     private string getMethodMappedPath() {
-        result = this.getAnAnnotation().(SpringRequestMappingAnnotation).getAnArrayValue(["value", "path"]).(StringLiteral).getValue()
+        (result = this.getAnAnnotation().(SpringRequestMappingAnnotation).getStringValue("value") and result.length() > 0)
+        or
+        (result = this.getAnAnnotation().(SpringRequestMappingAnnotation).getStringValue("path") and result.length() > 0)
+        or
+        (result = this.getAnAnnotation().(SpringRequestMappingAnnotation).getAStringArrayValue(["value", "path"]) and result.length() > 0)
     }
 
     bindingset[path]
@@ -49,6 +56,10 @@ class SpringControllerRequestMethod extends SpringControllerMethod {
     }
 
     string getDescription() {
-        result = this.getAnAnnotation().(MethodDescAnnotation).getAnArrayValue(["value", "notes"]).(StringLiteral).getValue()
+        (result = this.getAnAnnotation().(MethodDescAnnotation).getStringValue("value") and result.length() > 0)
+        or
+        (result = this.getAnAnnotation().(MethodDescAnnotation).getStringValue("notes") and result.length() > 0)
+        or
+        (result = this.getAnAnnotation().(MethodDescAnnotation).getAStringArrayValue(["value", "notes"]) and result.length() > 0)
     }
 }
