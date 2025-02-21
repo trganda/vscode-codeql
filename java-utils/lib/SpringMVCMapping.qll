@@ -2,13 +2,18 @@ import java
 import semmle.code.java.dataflow.DataFlow
 import semmle.code.java.frameworks.spring.SpringController
 
-/** Annotation of spring web request */
+/** 
+ * Annotation of spring web request mapping
+ */
 class SpringRequestMappingAnnotation extends Annotation {
     SpringRequestMappingAnnotation() { this.getType() instanceof SpringRequestMappingAnnotationType }
 }
 
-class MethodDescAnnotation extends Annotation {
-    MethodDescAnnotation() {
+/**
+ * Annotation of swagger api operation `io.swagger.annotations.ApiOperation`
+ */
+class SwaggerApiOpAnnotation extends Annotation {
+    SwaggerApiOpAnnotation() {
         this.getType().hasQualifiedName("io.swagger.annotations", "ApiOperation")
     }
 }
@@ -24,6 +29,7 @@ class SpringControllerRequestMethod extends SpringControllerMethod {
           )
     }
 
+    // Get the path value of the controller class
     private string getControllerMappedPath() {
         (result = this.getDeclaringType().getAnAnnotation().(SpringRequestMappingAnnotation).getStringValue("value") and result.length() > 0)
         or
@@ -32,6 +38,7 @@ class SpringControllerRequestMethod extends SpringControllerMethod {
         (result = this.getDeclaringType().getAnAnnotation().(SpringRequestMappingAnnotation).getAStringArrayValue(["value", "path"]) and result.length() > 0)
     }
 
+    // Get the path value of the method
     private string getMethodMappedPath() {
         (result = this.getAnAnnotation().(SpringRequestMappingAnnotation).getStringValue("value") and result.length() > 0)
         or
@@ -55,11 +62,12 @@ class SpringControllerRequestMethod extends SpringControllerMethod {
         result = (formatMappedPath(getControllerMappedPath()) + formatMappedPath(getMethodMappedPath())).replaceAll("//", "/") 
     }
 
+    // Get the description of the api operation
     string getDescription() {
-        (result = this.getAnAnnotation().(MethodDescAnnotation).getStringValue("value") and result.length() > 0)
+        (result = this.getAnAnnotation().(SwaggerApiOpAnnotation).getStringValue("value") and result.length() > 0)
         or
-        (result = this.getAnAnnotation().(MethodDescAnnotation).getStringValue("notes") and result.length() > 0)
+        (result = this.getAnAnnotation().(SwaggerApiOpAnnotation).getStringValue("notes") and result.length() > 0)
         or
-        (result = this.getAnAnnotation().(MethodDescAnnotation).getAStringArrayValue(["value", "notes"]) and result.length() > 0)
+        (result = this.getAnAnnotation().(SwaggerApiOpAnnotation).getAStringArrayValue(["value", "notes"]) and result.length() > 0)
     }
 }
