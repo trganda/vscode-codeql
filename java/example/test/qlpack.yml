@@ -1,0 +1,5 @@
+name: trganda/java-example-tests
+dependencies:
+  codeql/java-all: "*"
+  trganda/java-example: "*"
+extractor: java

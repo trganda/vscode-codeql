@@ -1,9 +1,11 @@
 /**
+ * @id python/example/example
  * @name Gradio File Input Flow
  * @description This query tracks data flow from Gradio's Button component to a Decoding sink.
- * @kind path-problem
+ * @kind problem
+ * @precision medium
  * @problem.severity warning
- * @id 5/6
+ * @tags example
  */
 
 import python

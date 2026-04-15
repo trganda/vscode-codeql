@@ -1,0 +1,5 @@
+name: trganda/utils-tests
+dependencies:
+  codeql/java-all: "*"
+  trganda/utils: "*"
+extractor: java

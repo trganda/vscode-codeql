@@ -1,0 +1,6 @@
+name: python-example-tests
+version: 0.0.0
+dependencies:
+  codeql/python-all: "*"
+  trganda/python-example: "*"
+extractor: python

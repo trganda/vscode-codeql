@@ -1,0 +1,30 @@
+/**
+ * @id java/example/example
+ * @name example
+ * @description Replace this text with a description of your query.
+ * @kind problem
+ * @precision medium
+ * @problem.severity error
+ * @tags example
+ */
+
+import java
+import semmle.code.java.dataflow.DataFlow
+
+module Config implements DataFlow::ConfigSig {
+  predicate isSource(DataFlow::Node source) {
+    // Define your sources here
+    none()
+  }
+
+  predicate isSink(DataFlow::Node sink) {
+    // Define your sinks here
+    none()
+  }
+}
+
+module Flow = DataFlow::Global<Config>;
+
+from DataFlow::Node source, string msg
+where Flow::flow(source, _) and msg = "Replace this with your query."
+select source, msg
