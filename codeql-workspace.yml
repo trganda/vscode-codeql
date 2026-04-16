@@ -1,3 +1,5 @@
 provide:
   - '**/qlpack.yml'
   - '**/codeql-workspace.yml'
+ignore:
+  - '**/test/qlpack.yml'

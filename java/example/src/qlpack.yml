@@ -3,3 +3,4 @@ version: 0.0.0
 library: false
 dependencies:
   codeql/java-all: "*"
+  trganda/utils: "*"

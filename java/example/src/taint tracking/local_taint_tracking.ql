@@ -12,7 +12,7 @@ import semmle.code.java.dataflow.TaintTracking
 
 from Parameter src, Expr dst, Method m
 where
-m.getName() = "ttTest" and
-m.getParameter(0).getName() = src.getName() and
-TaintTracking::localTaint(DataFlow::parameterNode(src), DataFlow::exprNode(dst))
+  m.getName() = "ttTest" and
+  m.getParameter(0).getName() = src.getName() and
+  TaintTracking::localTaint(DataFlow::parameterNode(src), DataFlow::exprNode(dst))
 select m, dst, src

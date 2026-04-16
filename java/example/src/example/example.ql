@@ -9,22 +9,8 @@
  */
 
 import java
-import semmle.code.java.dataflow.DataFlow
+import lib.SpringMVCMapping
 
-module Config implements DataFlow::ConfigSig {
-  predicate isSource(DataFlow::Node source) {
-    // Define your sources here
-    none()
-  }
+from SpringControllerRequestMethod m
+select m, m.getMappedPath()
 
-  predicate isSink(DataFlow::Node sink) {
-    // Define your sinks here
-    none()
-  }
-}
-
-module Flow = DataFlow::Global<Config>;
-
-from DataFlow::Node source, string msg
-where Flow::flow(source, _) and msg = "Replace this with your query."
-select source, msg
