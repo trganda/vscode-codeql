@@ -9,7 +9,7 @@
  */
 
 import java
-import lib.SpringMVCMapping
+import frameworks.spring.SpringMVCMapping
 
 from SpringControllerRequestMethod m
 select m, m.getMappedPath()
