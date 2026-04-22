@@ -1,6 +1,5 @@
 {
   "codeQLCLI": "2.25.1",
-  "scope": "trganda",
   "codeQLPackConfiguration": [
     {
       "name": "trganda/utils",
