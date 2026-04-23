@@ -1,5 +1,7 @@
 name: trganda/java-example-tests
 dependencies:
   codeql/java-all: "*"
-  trganda/java-example: "*"
+  trganda/java-example: ${workspace}
 extractor: java
+tests: .
+warnOnImplicitThis: true
