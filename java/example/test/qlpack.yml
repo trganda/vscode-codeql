@@ -1,6 +1,7 @@
 name: trganda/java-example-tests
 dependencies:
   codeql/java-all: "*"
+  codeql/java-queries: "*"
   trganda/java-example: ${workspace}
 extractor: java
 tests: .

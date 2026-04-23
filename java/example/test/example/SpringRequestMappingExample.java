@@ -1,33 +1,34 @@
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 // Test case for Spring MVC REST API mappings
 @Controller
 @RequestMapping("/api/users")
-public class example {
+public class SpringRequestMappingExample {
     
-    @RequestMapping(value = "/getuser", method = org.springframework.web.bind.annotation.RequestMethod.GET)
+    @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public ResponseEntity<String> getUser() {
         return ResponseEntity.ok("Get user");
     }
     
-    @RequestMapping(value = "/create", method = org.springframework.web.bind.annotation.RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<String> createUser() {
         return ResponseEntity.ok("User created");
     }
     
-    @RequestMapping(value = "/update", method = org.springframework.web.bind.annotation.RequestMethod.PUT)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public ResponseEntity<String> updateUser() {
         return ResponseEntity.ok("User updated");
     }
     
-    @RequestMapping(value = "/delete", method = org.springframework.web.bind.annotation.RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteUser() {
         return ResponseEntity.ok("User deleted");
     }
     
-    @RequestMapping(value = "/list", method = org.springframework.web.bind.annotation.RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<String> listUsers() {
         return ResponseEntity.ok("List of users");
     }
@@ -37,12 +38,12 @@ public class example {
 @RequestMapping("/api/products")
 class ProductController {
     
-    @RequestMapping(value = "/detail", method = org.springframework.web.bind.annotation.RequestMethod.GET)
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public String getProduct() {
         return "Product detail";
     }
     
-    @RequestMapping(value = "/search", method = org.springframework.web.bind.annotation.RequestMethod.POST)
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchProducts() {
         return "Search results";
     }
@@ -52,12 +53,12 @@ class ProductController {
 @RequestMapping("/api/orders")
 class OrderController {
     
-    @RequestMapping(value = "/getOrder", method = org.springframework.web.bind.annotation.RequestMethod.GET)
+    @RequestMapping(value = "/getOrder", method = RequestMethod.GET)
     public String getOrder() {
         return "Order";
     }
     
-    @RequestMapping(value = "/createOrder", method = org.springframework.web.bind.annotation.RequestMethod.POST)
+    @RequestMapping(value = "/createOrder", method = RequestMethod.POST)
     public String createOrder() {
         return "Order created";
     }
