@@ -55,6 +55,11 @@ jobs:
         run: |
           qlt codeql install
 
+      - name: Install CodeQL Packs
+        shell: bash
+        run: |
+          qlt phase install
+
       - name: Run test suites
         id: run-test-suites
         shell: bash
