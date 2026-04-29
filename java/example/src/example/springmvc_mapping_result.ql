@@ -9,5 +9,5 @@
 import java
 import frameworks.spring.SpringMVCMapping
 
-from SpringControllerRequestMethod m
+from SpringRestEndpoint m
 select m, m.getMappedPath(), m.getDeclaringType().getPackage().getName()
