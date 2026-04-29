@@ -1,23 +1,14 @@
 {
-  "codeQLCLI": "2.25.1",
-  "codeQLPackConfiguration": [
+  "version": "2.25.1",
+  "packs": [
     {
-      "name": "trganda/utils",
-      "bundle": false,
-      "publish": false,
-      "referencesBundle": false
+      "name": "trganda/java-example"
     },
     {
-      "name": "trganda/java-example",
-      "bundle": false,
-      "publish": false,
-      "referencesBundle": false
+      "name": "trganda/utils"
     },
     {
-      "name": "trganda/python-example",
-      "bundle": false,
-      "publish": false,
-      "referencesBundle": false
+      "name": "trganda/python-example"
     }
   ]
 }

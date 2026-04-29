@@ -55,7 +55,7 @@ jobs:
         run: |
           qlt codeql install
 
-      - name: Install CodeQL Packs
+      - name: Install CodeQL Packs Dependencies
         shell: bash
         run: |
           qlt phase install
@@ -65,6 +65,7 @@ jobs:
         shell: bash
         run: >
           qlt phase test
+          --language java
           --num-threads 4
           --output "${{ runner.temp }}/test_report_${{ runner.os }}_${{ matrix.codeql_cli }}.json"
 

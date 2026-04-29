@@ -12,7 +12,7 @@ inputs:
     description: |
       The Go version to use for building QLT.
     required: false
-    default: 'latest'
+    default: '1.26.1'
 
 outputs:
   qlt-home:
@@ -25,7 +25,7 @@ runs:
     - name: Setup Go
       uses: actions/setup-go@v6
       with:
-        go-version: 1.26.1
+        go-version: ${{ inputs.go-version }}
 
     - name: Install QLT
       id: install-qlt
@@ -46,8 +46,5 @@ runs:
 
         echo -e "\e[0;32m[QLT]\e[0m Adding '$QLT_HOME' to system path"
         echo "$QLT_HOME" >> $GITHUB_PATH
-
-        echo -e "\e[0;32m[QLT]\e[0m Setting output parameter qlt-home to $QLT_HOME"
-        echo "qlt-home=$QLT_HOME" >> $GITHUB_OUTPUT
 
         echo -e "\e[0;32m[QLT]\e[0m Done."
