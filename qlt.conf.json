@@ -5,7 +5,8 @@
       "name": "trganda/java-example"
     },
     {
-      "name": "trganda/utils"
+      "name": "trganda/utils",
+      "bundle": true
     },
     {
       "name": "trganda/python-example"

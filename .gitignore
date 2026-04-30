@@ -7,3 +7,6 @@ codeql_db/
 vscode-codeql-starter.code-workspace
 *.testproj/
 *.actual
+
+# QLT build output
+target/
