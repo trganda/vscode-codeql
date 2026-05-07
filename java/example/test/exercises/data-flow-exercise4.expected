@@ -1,0 +1,4 @@
+| HardcodedUrlExample.java:38:24:38:51 | getenv(...) | Data flow to $@. | HardcodedUrlExample.java:38:24:38:51 | getenv(...) | getenv(...) |
+| HardcodedUrlExample.java:42:23:42:50 | getenv(...) | Data flow to $@. | HardcodedUrlExample.java:43:24:43:27 | spec | spec |
+| HardcodedUrlExample.java:52:16:52:43 | getenv(...) | Data flow to $@. | HardcodedUrlExample.java:57:24:57:27 | spec | spec |
+| HardcodedUrlExample.java:71:25:71:52 | getenv(...) | Data flow to $@. | HardcodedUrlExample.java:67:24:67:27 | spec | spec |

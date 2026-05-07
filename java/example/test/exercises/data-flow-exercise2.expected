@@ -1,0 +1,4 @@
+| HardcodedUrlExample.java:7:24:7:51 | "https://example.com/direct" | Data flow to $@. | HardcodedUrlExample.java:7:24:7:51 | "https://example.com/direct" | "https://example.com/direct" |
+| HardcodedUrlExample.java:11:23:11:53 | "https://example.com/via-local" | Data flow to $@. | HardcodedUrlExample.java:12:24:12:27 | spec | spec |
+| HardcodedUrlExample.java:23:16:23:47 | "https://example.com/reassigned" | Data flow to $@. | HardcodedUrlExample.java:24:24:24:27 | spec | spec |
+| HardcodedUrlExample.java:27:48:27:77 | "https://example.com/constant" | Data flow to $@. | HardcodedUrlExample.java:30:24:30:35 | CONSTANT_URL | CONSTANT_URL |

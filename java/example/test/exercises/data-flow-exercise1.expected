@@ -1,0 +1,3 @@
+| HardcodedUrlExample.java:7:24:7:51 | "https://example.com/direct" | This method call is using a hardcoded string to create a URL |
+| HardcodedUrlExample.java:11:23:11:53 | "https://example.com/via-local" | This method call is using a hardcoded string to create a URL |
+| HardcodedUrlExample.java:23:16:23:47 | "https://example.com/reassigned" | This method call is using a hardcoded string to create a URL |

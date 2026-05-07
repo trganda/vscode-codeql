@@ -1,0 +1,5 @@
+name: trganda/java-queries-tests
+dependencies:
+  codeql/java-all: "*"
+  trganda/java-queries: ${workspace}
+extractor: java
