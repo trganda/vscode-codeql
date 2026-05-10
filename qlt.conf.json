@@ -13,6 +13,9 @@
     },
     {
       "name": "trganda/java-queries"
+    },
+    {
+      "name": "trganda/go-example"
     }
   ]
 }

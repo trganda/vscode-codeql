@@ -1,0 +1,6 @@
+name: trganda/go-example-tests
+version: 0.0.0
+dependencies:
+  codeql/go-all: "*"
+  trganda/go-example: ${workspace}
+extractor: go
