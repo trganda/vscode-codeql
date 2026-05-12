@@ -1,0 +1,2 @@
+WARNING: reference to 'Pongo2' references a local library, not the named module (TemplateExecuteCalls.ql:15,8-14)
+| Pongo2Injection.go:94:2:94:43 | call to Execute | Call to (*pongo2.Template).Execute. |

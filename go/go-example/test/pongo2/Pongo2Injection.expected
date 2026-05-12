@@ -1,0 +1,25 @@
+WARNING: reference to 'Pongo2' references a local library, not the named module (Pongo2Injection.ql:19,8-14)
+edges
+| Pongo2Injection.go:14:18:14:19 | definition of in | Pongo2Injection.go:15:7:15:8 | in | provenance |  |
+| Pongo2Injection.go:15:7:15:8 | in | Pongo2Injection.go:15:7:15:17 | call to String | provenance | MaD:301 |
+| Pongo2Injection.go:15:7:15:17 | call to String | Pongo2Injection.go:16:27:16:27 | s | provenance |  |
+| Pongo2Injection.go:27:19:27:20 | definition of in | Pongo2Injection.go:28:11:28:12 | in | provenance |  |
+| Pongo2Injection.go:28:11:28:12 | in | Pongo2Injection.go:28:11:28:21 | call to String | provenance | MaD:301 |
+nodes
+| Pongo2Injection.go:14:18:14:19 | definition of in | semmle.label | definition of in |
+| Pongo2Injection.go:15:7:15:8 | in | semmle.label | in |
+| Pongo2Injection.go:15:7:15:17 | call to String | semmle.label | call to String |
+| Pongo2Injection.go:16:27:16:27 | s | semmle.label | s |
+| Pongo2Injection.go:27:19:27:20 | definition of in | semmle.label | definition of in |
+| Pongo2Injection.go:28:11:28:12 | in | semmle.label | in |
+| Pongo2Injection.go:28:11:28:21 | call to String | semmle.label | call to String |
+| Pongo2Injection.go:46:27:46:31 | selection of cmd | semmle.label | selection of cmd |
+| Pongo2Injection.go:56:11:56:15 | selection of url | semmle.label | selection of url |
+| Pongo2Injection.go:66:10:66:15 | selection of path | semmle.label | selection of path |
+subpaths
+#select
+| Pongo2Injection.go:16:27:16:27 | s | Pongo2Injection.go:14:18:14:19 | definition of in | Pongo2Injection.go:16:27:16:27 | s | Untrusted custom pongo2 filter input flows to a command execution sink. |
+| Pongo2Injection.go:28:11:28:21 | call to String | Pongo2Injection.go:27:19:27:20 | definition of in | Pongo2Injection.go:28:11:28:21 | call to String | Untrusted custom pongo2 filter input flows to a SSRF sink. |
+| Pongo2Injection.go:46:27:46:31 | selection of cmd | Pongo2Injection.go:46:27:46:31 | selection of cmd | Pongo2Injection.go:46:27:46:31 | selection of cmd | Untrusted custom pongo2 tag-node field flows to a command execution sink. |
+| Pongo2Injection.go:56:11:56:15 | selection of url | Pongo2Injection.go:56:11:56:15 | selection of url | Pongo2Injection.go:56:11:56:15 | selection of url | Untrusted custom pongo2 tag-node field flows to a SSRF sink. |
+| Pongo2Injection.go:66:10:66:15 | selection of path | Pongo2Injection.go:66:10:66:15 | selection of path | Pongo2Injection.go:66:10:66:15 | selection of path | Untrusted custom pongo2 tag-node field flows to a file path sink. |
